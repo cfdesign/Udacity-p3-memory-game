@@ -20,7 +20,6 @@ html {
   h4,
   h5 {
     margin: 0; 
-    font-weight: 100;
   }
   
   header,
@@ -30,8 +29,3 @@ html {
     box-sizing: border-box;
   }
   
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
