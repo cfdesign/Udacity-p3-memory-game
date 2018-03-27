@@ -29,3 +29,14 @@ html {
     box-sizing: border-box;
   }
   
+  .game-container {
+    width: 100%;
+    background-color: #89b6e2;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .card {
+    width:20%;
+    background-color: #a0a0a0;
+  }
