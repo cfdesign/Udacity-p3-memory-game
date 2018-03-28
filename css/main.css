@@ -1,45 +1,85 @@
 @import url('https://fonts.googleapis.com/css?family=Questrial');
 html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-  }
-  
-  body {
-    font: 100 14px questrial;
-    color: #ffffff;
-    padding: 2em 1em;
-    max-width: 1000px;
-    margin: auto; 
-  }
-  
-  h1,
-  h2,
-  h3,
-  h4,
-  h5 {
-    margin: 0; 
-  }
-  
-  header,
-  footer,
-  section,
-  div {
-    box-sizing: border-box;
-  }
-  
-  .game-container {
-    width: 100%;
-    background-color: #89b6e2;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding:1.3% 2.5%;
-  }
-  .card {
-    width:23%;
-    padding: 23% 0 0;
-    margin: 1.35% 0;
-    background-color: #a0a0a0;
-  }
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font: 100 14px questrial;
+  color: #ffffff;
+  padding: 2em 1em;
+  max-width: 1000px;
+  margin: auto; 
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0; 
+}
+
+header,
+footer,
+section,
+div {
+  box-sizing: border-box;
+}
+
+.game-container {
+  width: 100%;
+  background-color: #89b6e2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding:1.3% 2.5%;
+}
+.card {
+  width:23%;
+  padding: 23% 0 0;
+  margin: 1.35% 0;
+  background-color: #a0a0a0;
+}
+
+.dessert {
+  background: url(../images/dessert.svg) no-repeat bottom left #fff;
+  background-size: contain;
+}
+
+.island {
+  background: url(../images/island.svg) no-repeat bottom left #fff;
+  background-size: contain;
+}
+
+.mountain {
+  background: url(../images/mountain.svg) no-repeat bottom left #fff;
+  background-size: contain;
+}
+
+.rail {
+  background: url(../images/rail.svg) no-repeat bottom left #fff;
+  background-size: contain;
+}
+
+.ship {
+  background: url(../images/ship.svg) no-repeat bottom left #fff;
+  background-size: contain;
+}
+
+.stadium {
+  background: url(../images/stadium.svg) no-repeat bottom left #fff;
+  background-size: contain;
+}
+
+.trail {
+  background: url(../images/trail.svg) no-repeat bottom left #fff;
+  background-size: contain;
+}
+
+.woods {
+  background: url(../images/woods.svg) no-repeat bottom left #fff;
+  background-size: contain;
+}
