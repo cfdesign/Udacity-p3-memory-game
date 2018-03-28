@@ -45,7 +45,7 @@ div {
   position: relative;
 }
 
-.front, .back { /* hide the .back class to show symbol */
+.front {/* , .back {  hide the .back class to show symbol */
   position: absolute;
   top: 0;
 	left: 0;
