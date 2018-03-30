@@ -1,10 +1,10 @@
 
 let symbols = ["dessert", "island", "mountain", "rail", "ship", "stadium", "trail", "woods", "dessert", "island", "mountain", "rail", "ship", "stadium", "trail", "woods"];
 
-shuffle(symbols);
+shuffle();
 
-function shuffle(array) {
-    let currentIndex = array.length, 
+function shuffle() {
+    let currentIndex = symbols.length, 
     temporaryValue, 
     randomIndex;
   
@@ -16,12 +16,12 @@ function shuffle(array) {
       currentIndex -= 1; //4 -1 = 3
   
       // And swap it with the current element.
-      temporaryValue = array[currentIndex]; 
-      array[currentIndex] = array[randomIndex]; 
-      array[randomIndex] = temporaryValue; 
+      temporaryValue = symbols[currentIndex]; 
+      symbols[currentIndex] = symbols[randomIndex]; 
+      symbols[randomIndex] = temporaryValue; 
     }
   
-    return array;
+    return symbols;
   }
 
 //LOGIC WORKS 'FOR.. OF' - APPLY TO FOR.. OF LOOP? 
