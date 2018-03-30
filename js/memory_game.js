@@ -24,9 +24,11 @@ function shuffle(array) {
     return array;
   }
 
-const container = document.querySelector('.game-container').children;
-let childNumber = 0;
-for (const symbol of symbols) {
-    container[childNumber].children[0].className += ` ${symbol}`;
-    childNumber += 1;
+function arrayToCss() {
+    const container = document.querySelector('.game-container').children;
+    let childNumber = 0;
+    for (const symbol of symbols) {
+        container[childNumber].children[0].className += ` ${symbol}`;
+        childNumber += 1;
+    }
 }
