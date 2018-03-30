@@ -20,11 +20,9 @@ function shuffle() {
       symbols[currentIndex] = symbols[randomIndex]; 
       symbols[randomIndex] = temporaryValue; 
     }
-    return symbols;
+    return duplication();
 }
 
-//LOGIC WORKS 'FOR.. OF' - APPLY TO FOR.. OF LOOP? 
-    //LOGIC ERROR 'IF STATEMENT' - RETURN VALUES. 
 function duplication() {
     for (let i = 1; i < symbols.length; i++) {
         let previous = symbols[i -1],
@@ -33,7 +31,7 @@ function duplication() {
             return shuffle();
         }
     }
-return arrayToCss();
+    return arrayToCss();
 } 
 
 function arrayToCss() {
@@ -41,6 +39,6 @@ function arrayToCss() {
     let childNumber = 0;
     for (const symbol of symbols) {
         container[childNumber].children[0].className += ` ${symbol}`;
-        childNumber += 1;
+        childNumber ++;
     }
 }
