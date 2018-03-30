@@ -24,6 +24,19 @@ function shuffle(array) {
     return array;
   }
 
+//LOGIC WORKS 'FOR.. OF' - APPLY TO FOR.. OF LOOP? 
+    //LOGIC ERROR 'IF STATEMENT' - RETURN VALUES. 
+    function duplication() {
+        for (let i = 1; i < symbols.length; i++) {
+        let compare = i; //
+        compare = compare -= 1;
+            if (symbols[compare] === symbols[i]) {
+                return true;
+            }
+        }
+    return false;
+    } 
+
 function arrayToCss() {
     const container = document.querySelector('.game-container').children;
     let childNumber = 0;
