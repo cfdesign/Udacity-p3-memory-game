@@ -36,13 +36,22 @@ div {
   content: "";
   clear: both;  
   display: table;
+  perspective: 1000px;
 }
+
+.game-container.clicked .card {
+  transform: rotateY(180deg);
+}
+
 .card {
   padding: 11.5%;
   margin: 1% 1%;
   background-color: #a0a0a0;
   position: relative;
   float: left;
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
 }
 
 .front {/* , .back {  hide the .back class to show symbol */
@@ -51,6 +60,15 @@ div {
 	left: 0;
   padding: 50%;
   background-color: #a0a0a0;
+  backface-visibility: hidden;
+}
+
+.front {
+  transform: rotateY(0deg);
+}
+
+.back {
+  transform: rotateY(180deg);
 }
 
 .dessert {
