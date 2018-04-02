@@ -8,7 +8,7 @@ html {
 
 body {
   font: 100 14px questrial;
-  color: #ffffff;
+  color: #a0a0a0;
   padding: 2em 1em;
   max-width: 1000px;
   margin: auto; 
@@ -28,6 +28,21 @@ section,
 div {
   box-sizing: border-box;
 }
+
+.status-container {
+  width:80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 0 auto 2%;
+}
+
+.clicks, .timer, .rating, .restart {
+  width:26%;
+  margin: 0 0 2%;
+  text-align: center;
+
+} 
 
 .game-container {
   width: 100%;
@@ -63,7 +78,7 @@ div {
 }
 
 .front {
-  transform: rotateY(0deg);
+  transform: rotateY(0deg); /* swap with .back to reverse animation (show back first, then front)*/
 }
 
 .back {
