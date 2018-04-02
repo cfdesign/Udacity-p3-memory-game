@@ -36,7 +36,6 @@ div {
   content: "";
   clear: both;  
   display: table;
-  perspective: 1000px;
 }
 
 .card.clicked {
