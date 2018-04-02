@@ -46,10 +46,12 @@ function arrayToCss() {
 const gameContainer = document.querySelector('.game-container');
 gameContainer.addEventListener('click', clickAnimation); 
 
-let noTimer = true;
+let noTimer = true,
+target;
 function clickAnimation(evt) {
     if (evt.target.className != 'game-container') {  // ← verifies target is desired element
-        evt.target.parentElement.classList.toggle('clicked');
+        target = evt.target
+        target.parentElement.classList.toggle('clicked');
         if (noTimer) {
             noTimer = false;
             timer = setInterval(addTime, 1000);
