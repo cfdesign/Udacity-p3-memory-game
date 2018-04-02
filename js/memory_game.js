@@ -42,3 +42,14 @@ function arrayToCss() {
         childNumber ++;
     }
 }
+
+const gameContainer = document.querySelector('.game-container');
+gameContainer.addEventListener('click', clickAnimation); 
+
+function clickAnimation(evt) {
+    if (evt.target.className != 'game-container') {  // ← verifies target is desired element
+        evt.target.parentElement.classList.toggle('clicked');
+    } 
+};
+
+//evt.target.classList.toggle('clicked');
