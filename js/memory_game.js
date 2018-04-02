@@ -50,9 +50,9 @@ let timerDone = false;
 function clickAnimation(evt) {
     if (evt.target.className != 'game-container') {  // ← verifies target is desired element
         evt.target.parentElement.classList.toggle('clicked');
-    if (timerDone === false) {
-        timerDone = true;
-        timer = setInterval(addTime, 1000);
+        if (timerDone === false) {
+            timerDone = true;
+            timer = setInterval(addTime, 1000);
         }
         clickLog();
         //rating();
