@@ -49,7 +49,14 @@ gameContainer.addEventListener('click', clickAnimation);
 function clickAnimation(evt) {
     if (evt.target.className != 'game-container') {  // ← verifies target is desired element
         evt.target.parentElement.classList.toggle('clicked');
+        clickLog();
+        //timer();
+        //rating();
     } 
-};
+}
 
+let clicks = 0
+function clickLog() {
+    document.querySelector('.count').textContent = ++clicks;
+}
 //evt.target.classList.toggle('clicked');
