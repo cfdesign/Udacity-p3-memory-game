@@ -50,13 +50,29 @@ function clickAnimation(evt) {
     if (evt.target.className != 'game-container') {  // ← verifies target is desired element
         evt.target.parentElement.classList.toggle('clicked');
         clickLog();
-        //timer();
+        timer = setInterval(addTime, 1000);
         //rating();
     } 
 }
 
-let clicks = 0
+let clicks = 0;
 function clickLog() {
     document.querySelector('.count').textContent = ++clicks;
 }
-//evt.target.classList.toggle('clicked');
+
+let seconds = 0,
+minutes = 0,
+formatSec;
+function addTime() {
+	if (seconds < 59) {
+    	++seconds;
+        formatSec = seconds;
+        if (seconds < 10) {
+			formatSec = "0"+seconds;
+        }
+	} else {
+    	++minutes;
+    	seconds=0;
+    }
+    document.querySelector('.duration').innerHTML= minutes+":"+formatSec;
+}
