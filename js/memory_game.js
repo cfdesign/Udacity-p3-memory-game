@@ -99,10 +99,22 @@ function findCardClass () {
         if (firstClass == secondClass) {
             firstCardClick = undefined;
             secondCardClick = undefined;
-            //matchCounter();
+            return matchLog();
         }
     } else {
         firstCardClick = target;
         firstClass = firstCardClick.previousElementSibling.className;
     }
+}
+
+let match = 0;
+function matchLog() {
+    match++;
+    if (match === 1) {
+     return gameComplete();
+    }
+}
+
+function gameComplete() {
+    setTimeout(function() { alert("congratulations"); }, 1000);
 }
