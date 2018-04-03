@@ -55,7 +55,7 @@ function clickActions(evt) {
         firstCardClick = undefined;
         secondCardClick = undefined; //resetCardClick();
     }
-    if (evt.target.className === 'back' && !secondCardClick) {  // ← verifies target is desired element
+    if (evt.target.className === 'back') {  // ← verifies target is desired element
         target = evt.target
         target.parentElement.classList.toggle('clicked');
         if (noTimer) {
