@@ -44,11 +44,11 @@ function arrayToCss() {
 }
 
 const gameContainer = document.querySelector('.game-container');
-gameContainer.addEventListener('click', clickAnimation); 
+gameContainer.addEventListener('click', clickActions); 
 
 let noTimer = true,
 target;
-function clickAnimation(evt) { //clickActions
+function clickActions(evt) {
     if (secondCardClick) {
         firstCardClick.parentElement.classList.toggle('clicked'); //toggleCard(); ?
         secondCardClick.parentElement.classList.toggle('clicked');
