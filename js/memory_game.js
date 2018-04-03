@@ -48,17 +48,23 @@ gameContainer.addEventListener('click', clickAnimation);
 
 let noTimer = true,
 target;
-function clickAnimation(evt) {
-    if (evt.target.className === 'back') {  // ← verifies target is desired element
+function clickAnimation(evt) { //clickActions
+    if (secondCardClick) {
+        firstCardClick.parentElement.classList.toggle('clicked'); //toggleCard(); ?
+        secondCardClick.parentElement.classList.toggle('clicked');
+        firstCardClick = undefined;
+        secondCardClick = undefined; //resetCardClick();
+    }
+    if (evt.target.className === 'back' && !secondCardClick) {  // ← verifies target is desired element
         target = evt.target
         target.parentElement.classList.toggle('clicked');
         if (noTimer) {
             noTimer = false;
             timer = setInterval(addTime, 1000);
         }
-       // cardCheck();
+        findCardClass();
         clickLog();
-        //rating();
+        //rating(); move to clickLog();
     } 
 }
 
@@ -84,18 +90,19 @@ function addTime() {
     document.querySelector('.duration').innerHTML= minutes+":"+formatSec;
 }
 
-//let firstCardClick,
-//secondCardClick, firstClass, secondClass;
-//function cardCheck () {
-   // if (firstCardClick) {
-       // secondCardClick = target;
-       // firstClass = firstCardClick.nextElementSibling.className,
-       // secondClass = secondCardClick.nextElementSibling.className;
-        //if (firstClass == secondClass) {
-
-//}
-   // } else {
-     //   firstCardClick = target;
-    //}
-
-//}
+let firstCardClick,
+secondCardClick, firstClass, secondClass;
+function findCardClass () {
+    if (firstCardClick) {
+        secondCardClick = target;
+        secondClass = secondCardClick.previousElementSibling.className;
+        if (firstClass == secondClass) {
+            firstCardClick = undefined;
+            secondCardClick = undefined;
+            //matchCounter();
+        }
+    } else {
+        firstCardClick = target;
+        firstClass = firstCardClick.previousElementSibling.className;
+    }
+}
