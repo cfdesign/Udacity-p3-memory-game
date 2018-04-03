@@ -50,6 +50,8 @@ let noTimer = true,
 target;
 function clickActions(evt) {
     if (secondCardClick) {
+        firstCardClick.parentElement.classList.remove('mismatch');
+        secondCardClick.parentElement.classList.remove('mismatch');
         firstCardClick.parentElement.classList.toggle('clicked'); //toggleCard(); ?
         secondCardClick.parentElement.classList.toggle('clicked');
         firstCardClick = undefined;
@@ -97,9 +99,14 @@ function findCardClass () {
         secondCardClick = target;
         secondClass = secondCardClick.previousElementSibling.className;
         if (firstClass == secondClass) {
+            firstCardClick.parentElement.classList.add('match');
+            secondCardClick.parentElement.classList.add('match');
             firstCardClick = undefined;
             secondCardClick = undefined;
             return matchLog();
+        } else {
+            firstCardClick.parentElement.classList.add('mismatch');
+            secondCardClick.parentElement.classList.add('mismatch');
         }
     } else {
         firstCardClick = target;
@@ -110,7 +117,7 @@ function findCardClass () {
 let match = 0;
 function matchLog() {
     match++;
-    if (match === 1) {
+    if (match === 8) {
      return gameComplete();
     }
 }
