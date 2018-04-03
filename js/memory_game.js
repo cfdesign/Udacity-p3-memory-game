@@ -49,13 +49,14 @@ gameContainer.addEventListener('click', clickAnimation);
 let noTimer = true,
 target;
 function clickAnimation(evt) {
-    if (evt.target.className != 'game-container') {  // ← verifies target is desired element
+    if (evt.target.className === 'back') {  // ← verifies target is desired element
         target = evt.target
         target.parentElement.classList.toggle('clicked');
         if (noTimer) {
             noTimer = false;
             timer = setInterval(addTime, 1000);
         }
+       // cardCheck();
         clickLog();
         //rating();
     } 
@@ -82,3 +83,19 @@ function addTime() {
     }
     document.querySelector('.duration').innerHTML= minutes+":"+formatSec;
 }
+
+//let firstCardClick,
+//secondCardClick, firstClass, secondClass;
+//function cardCheck () {
+   // if (firstCardClick) {
+       // secondCardClick = target;
+       // firstClass = firstCardClick.nextElementSibling.className,
+       // secondClass = secondCardClick.nextElementSibling.className;
+        //if (firstClass == secondClass) {
+
+//}
+   // } else {
+     //   firstCardClick = target;
+    //}
+
+//}
