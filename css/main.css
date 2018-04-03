@@ -68,7 +68,7 @@ div {
   position: relative;
 }
 
-.front, .back{/* {  hide the .back class to show symbol */
+.front, .back{
   position: absolute;
   top: 0;
 	left: 0;
@@ -78,11 +78,11 @@ div {
 }
 
 .front {
-  transform: rotateY(0deg); /* swap with .back to reverse animation (show back first, then front)*/
+  transform: rotateY(180deg); /* swap with .back to reverse animation (show back first, then front)*/
 }
 
 .back {
-  transform: rotateY(180deg);
+  transform: rotateY(0deg);
 }
 
 .dessert {
