@@ -68,9 +68,9 @@ div {
   position: relative;
   float: left;
   transition: 0.6s;
-	/*-webkit-transform-style: preserve-3d;
+	-webkit-transform-style: preserve-3d;
 	-moz-transform-style: preserve-3d;
-	-o-transform-style: preserve-3d;*/
+	-o-transform-style: preserve-3d;
   transform-style: preserve-3d;
   -webkit-backface-visibility: hidden;
 	-moz-backface-visibility: hidden;
@@ -90,18 +90,19 @@ div {
 	backface-visibility: hidden;}
 
 .front {
-  /*-webkit-transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
-  -o-transform: rotateY(180deg);*/
+  -o-transform: rotateY(180deg);
   transform: rotateY(180deg);/* swap with .back to reverse animation (show back first, then front)*/
-  /*border: 1px solid #a0a0a0;*/
 }
 
 .back {
-  /*-webkit-transform: rotateY(0deg);
+  -webkit-transform: rotateY(0deg);
   -moz-transform: rotateY(0deg);
-  -o-transform: rotateY(0deg);*/
+  -o-transform: rotateY(0deg);
   transform: rotateY(0deg);
+  background: url(../images/question.svg) no-repeat bottom left #a0a0a0;
+  background-size: contain;
   }
 
 .dessert {
