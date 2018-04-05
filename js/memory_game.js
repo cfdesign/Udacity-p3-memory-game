@@ -66,14 +66,27 @@ function clickActions(evt) {
         }
         findCardClass();
         clickLog();
-        //rating(); move to clickLog();
     } 
 }
 
 let clicks = 0;
 function clickLog() {
     document.querySelector('.count').textContent = ++clicks;
+    //return rating();
 }
+
+//const ratingBox = document.querySelector('.stars').innerHTML;
+//let threeStars = 
+
+//function rating() {
+    //if (clicks < 31) {
+     //   threeStars;
+    //} else if (clicks < 41) {
+    //    twoStars;
+    //} else {
+    //    oneStar;
+    //}
+//}
 
 let seconds = 0,
 minutes = 0,
