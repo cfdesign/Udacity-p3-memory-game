@@ -72,21 +72,21 @@ function clickActions(evt) {
 let clicks = 0;
 function clickLog() {
     document.querySelector('.count').textContent = ++clicks;
-    //return rating();
+    return rating();
 }
 
-//const ratingBox = document.querySelector('.stars').innerHTML;
-//let threeStars = 
+const ratingBox = document.querySelector('.stars'),
+threeStar = "0 0",
+twoStar = "50% 0",
+oneStar = "100% 0";
 
-//function rating() {
-    //if (clicks < 31) {
-     //   threeStars;
-    //} else if (clicks < 41) {
-    //    twoStars;
-    //} else {
-    //    oneStar;
-    //}
-//}
+function rating() {
+    if (clicks > 30 && clicks < 41) {
+        ratingBox.style.backgroundPosition= twoStar;
+    } else if (clicks > 40){
+        ratingBox.style.backgroundPosition= oneStar;
+    }
+}
 
 let seconds = 0,
 minutes = 0,
