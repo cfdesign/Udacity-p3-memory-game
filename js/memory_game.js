@@ -81,9 +81,11 @@ twoStar = "50% 0",
 oneStar = "100% 0";
 
 function rating() {
-    if (clicks > 30 && clicks < 41) {
+    if (clicks < 31) {
+        ratingBox.style.backgroundPosition=threeStar;
+    } else if (clicks > 30 && clicks < 41) {
         ratingBox.style.backgroundPosition= twoStar;
-    } else if (clicks > 40){
+    } else {
         ratingBox.style.backgroundPosition= oneStar;
     }
 }
