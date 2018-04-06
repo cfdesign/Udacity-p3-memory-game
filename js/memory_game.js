@@ -138,5 +138,9 @@ function matchLog() {
 }
 
 function gameComplete() {
-    setTimeout(function() { alert("congratulations"); }, 1000);
+    yourRating = document.querySelector('.stars').outerHTML;
+    yourTime = document.querySelector('.duration').innerHTML;
+    //restartGame = restart();
+    clearInterval(timer)
+    setTimeout(function() { alert("congratulations, you took "+yourTime); }, 1000);
 }
