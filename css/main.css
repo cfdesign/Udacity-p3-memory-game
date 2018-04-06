@@ -30,19 +30,27 @@ div {
 }
 
 .status-container {
-  width:80%;
+  width:100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   margin: 0 auto 2%;
+  text-align: center;
 }
 
-.clicks, .timer, .rating, .restart {
-  width:26%;
-  margin: 0 0 2%;
-  text-align: center;
+.rating {
+  order: -1;
+  width:100%;
+}
 
-} 
+.stars {
+  width:12%;
+  padding-top:4%;
+  margin: auto;
+  margin-bottom: 2%;
+  background: url(../images/stars.svg) no-repeat 0% 0%; /* 0% = 3 star - 50% = 2 - 100% = 1*/
+  background-size: 167%;
+}
 
 .game-container {
   width: 100%;
