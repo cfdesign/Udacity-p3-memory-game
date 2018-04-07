@@ -82,8 +82,9 @@ div {
   transform-style: preserve-3d;
   -webkit-backface-visibility: hidden;
 	-moz-backface-visibility: hidden;
-  -o-backface-visibility: hidden*/;
-	backface-visibility: hidden;}
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
 
 .front, .back{
   position: absolute;
