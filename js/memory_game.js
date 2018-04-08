@@ -1,5 +1,7 @@
-
-let symbols = ["dessert", "island", "mountain", "rail", "ship", "stadium", "trail", "woods", "dessert", "island", "mountain", "rail", "ship", "stadium", "trail", "woods"];
+const gameContainer = document.querySelector('.game-container'),
+ratingBox = document.querySelector('.stars');
+let target, firstCard, secondCard, firstClass, secondClass, moves=0, match = 0,
+symbols = ["dessert", "island", "mountain", "rail", "ship", "stadium", "trail", "woods", "dessert", "island", "mountain", "rail", "ship", "stadium", "trail", "woods"];
 
 shuffle();
 
@@ -35,7 +37,7 @@ function duplication() {
 } 
 
 function arrayToCss() {
-    const container = document.querySelector('.game-container').children;
+    const container = gameContainer.children;
     let childNumber = 0;
     for (const symbol of symbols) {
         container[childNumber].children[0].className += ` ${symbol}`;
@@ -43,98 +45,114 @@ function arrayToCss() {
     }
 }
 
-const gameContainer = document.querySelector('.game-container');
-gameContainer.addEventListener('click', clickActions); 
+gameContainer.addEventListener('click', findCardClass); 
 
-let noTimer = true,
-target;
-function clickActions(evt) {
-    if (secondCardClick) {
-        firstCardClick.parentElement.classList.remove('mismatch');
-        secondCardClick.parentElement.classList.remove('mismatch');
-        firstCardClick.parentElement.classList.toggle('clicked'); //toggleCard(); ?
-        secondCardClick.parentElement.classList.toggle('clicked');
-        firstCardClick = undefined;
-        secondCardClick = undefined; //resetCardClick();
-    }
-    if (evt.target.className === 'back') {  // ← verifies target is desired element
+function findCardClass(evt) {
+    if (evt.target.className === 'back') { // ← verifies target is desired 
+        gameContainer.removeEventListener('click', findCardClass); 
         target = evt.target;
-        target.parentElement.classList.toggle('clicked');
-        if (noTimer) {
-            noTimer = false;
-            timer = setInterval(addTime, 1000);
+        if (secondCard) {
+        animateFlip(firstCard);//toggleCard(); ?
+        animateFlip(secondCard);
+        firstCard = undefined;
+        secondCard = undefined;    
         }
-        findCardClass();
-        clickLog();
-    } 
-}
-
-let clicks = 0;
-function clickLog() {
-    document.querySelector('.count').textContent = ++clicks;
-    return rating();
-}
-
-const ratingBox = document.querySelector('.stars'),
-threeStar = "0 0",
-twoStar = "50% 0",
-oneStar = "100% 0";
-
-function rating() {
-    if (clicks < 31) {
-        ratingBox.style.backgroundPosition=threeStar;
-    } else if (clicks > 30 && clicks < 41) {
-        ratingBox.style.backgroundPosition= twoStar;
-    } else {
-        ratingBox.style.backgroundPosition= oneStar;
-    }
-}
-
-let seconds = 0,
-minutes = 0,
-formatSec;
-function addTime() {
-	if (seconds < 59) {
-    	++seconds;
-        formatSec = seconds;
-        if (seconds < 10) {
-			formatSec = "0"+seconds;
-        }
-	} else {
-    	++minutes;
-    	seconds=0;
-    }
-    document.querySelector('.duration').innerHTML= minutes+":"+formatSec;
-}
-
-let firstCardClick,
-secondCardClick, firstClass, secondClass;
-function findCardClass () {
-    if (firstCardClick) {
-        secondCardClick = target;
-        secondClass = secondCardClick.previousElementSibling.className;
-        if (firstClass == secondClass) {
-            firstCardClick.parentElement.classList.add('match');
-            secondCardClick.parentElement.classList.add('match');
-            firstCardClick = undefined;
-            secondCardClick = undefined;
-            return matchLog();
+        if (!firstCard) {
+            firstCard = target  
+            firstClass = firstCard.previousElementSibling.className;
+            if (moves===0) {
+                timer(); // timer(); swap for
+            }
+            animateFlip(target);
+            setTimeout(function(){
+                gameContainer.addEventListener('click', findCardClass); 
+            }, 200); // too long but also does not need to be applied to first click
         } else {
-            firstCardClick.parentElement.classList.add('mismatch');
-            secondCardClick.parentElement.classList.add('mismatch');
+            secondCard = target
+            secondClass = secondCard.previousElementSibling.className;
+            animateFlip(target);
+            return matchCheck();
         }
-    } else {
-        firstCardClick = target;
-        firstClass = firstCardClick.previousElementSibling.className;
     }
 }
 
-let match = 0;
+//animateFlip
+function animateFlip(toFlip) {
+    toFlip.parentElement.classList.toggle('clicked');
+}
+
+function animateMatch(toMatch) {
+    toMatch.parentElement.classList.toggle('match');
+}
+
+function animateMiss(toMiss) {
+    toMiss.parentElement.classList.toggle('mismatch');
+}
+
+function matchCheck() {
+    if (firstClass == secondClass) {
+        animateMatch(firstCard);
+        animateMatch(secondCard);
+        firstCard = undefined;
+        secondCard = undefined;    
+        return matchLog();
+    } else {
+        animateMiss(firstCard);
+        animateMiss(secondCard);
+        setTimeout(function () { 
+            animateMiss(firstCard);
+            animateMiss(secondCard);
+        }, 500);
+        return moveLog();
+    }
+}
+
 function matchLog() {
     match++;
     if (match === 8) {
      return gameComplete();
+    } 
+    return moveLog();
+}
+
+function timer() {
+    timer = setInterval(addTime, 1000);
+    let seconds = 0, ///should condense this into timer function - declare variables local or global?
+    minutes = 0,
+    formatSec;
+    function addTime() {
+        if (seconds < 59) {
+            ++seconds;
+            if (seconds < 10) {
+                seconds = "0"+seconds;
+            }
+        } else {
+            ++minutes;
+            seconds=0;
+        }
+        document.querySelector('.duration').innerHTML= minutes+":"+seconds;
     }
+}
+
+function moveLog() {
+    document.querySelector('.count').textContent = ++moves;
+    return rating();
+}
+
+function rating() {
+    const threeStar = "0 0",
+    twoStar = "50% 0",
+    oneStar = "100% 0";
+    if (moves < 16) {
+        ratingBox.style.backgroundPosition=threeStar;
+    } else if (moves > 15 && moves < 21) {
+        ratingBox.style.backgroundPosition= twoStar;
+    } else {
+        ratingBox.style.backgroundPosition= oneStar;
+    }
+    setTimeout(function(){
+        gameContainer.addEventListener('click', findCardClass); 
+    }, 600); // too long but also does not need to be applied to first click
 }
 
 function gameComplete() {
