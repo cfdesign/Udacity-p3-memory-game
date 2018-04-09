@@ -52,6 +52,48 @@ div {
   background-size: 167%;
 }
 
+.complete-container {
+  display: none;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  background: rgba(94, 94, 94, 0.75);
+  position: fixed;
+  top:0;
+  left:0;
+  padding: 10% 0 0;
+}
+
+.results-container {
+  width: 80%;
+  max-width: 500px;;
+  background-color: #fff;
+  margin: auto;
+  padding: 4%;
+  text-align: center;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top:2%;
+  right:6%;
+  font-size: 2em;
+  padding: 4%;
+}
+
+.congratulations {
+  margin-bottom: 0;
+}
+
+.reaction-1 {
+  margin-top: 0;
+}
+
+.moves-result, .timer-result{
+  padding: 0 0 1% 0;
+}
+
 .game-container {
   width: 100%;
   background-color: #89b6e2;
