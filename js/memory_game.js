@@ -3,10 +3,12 @@ gameContainer = document.querySelector('.game-container'),
 restartGame = document.querySelector('.restart'),
 yourMoves = document.querySelector('.count'),
 yourTime = document.querySelector('.duration'),
-yourRating = document.querySelector('.stars');
+yourRating = document.querySelector('.stars'),
+paragraphOne = document.querySelector('.reaction-1'),
+paragraphTwo = document.querySelector('.reaction-2');
 
 let symbols = ["dessert", "island", "mountain", "rail", "ship", "stadium", "trail", "woods", "dessert", "island", "mountain", "rail", "ship", "stadium", "trail", "woods"],
-target, firstCard, secondCard, firstClass, secondClass, timer, moves=0, match= 0;
+target, firstCard, secondCard, firstClass, secondClass, timer, moves=0, match= 0, reactionOne, reactionTwo;
 
 shuffle();
 
@@ -160,11 +162,11 @@ function moveLog() {
 
 function rating() {
     if (moves < 16) {
-        yourRating.style.backgroundPosition= "0 0";
+        yourRating.style.backgroundPosition= "0% 0%";
     } else if (moves > 15 && moves < 21) {
-        yourRating.style.backgroundPosition= "50% 0";
+        yourRating.style.backgroundPosition= "50% 0%";
     } else {
-        yourRating.style.backgroundPosition= "100% 0";
+        yourRating.style.backgroundPosition= "100% 0%";
     }
     setTimeout(function(){
         gameContainer.addEventListener('click', findCardClass); 
@@ -173,7 +175,7 @@ function rating() {
 
 function gameComplete() { 
     clearInterval(timer)
-    //reaction();
+    reaction();
     setTimeout(function() { 
         const completeContainer = document.querySelector('.complete-container');
         let resultMoves = document.querySelector('.end-count'),
@@ -181,9 +183,11 @@ function gameComplete() {
         resultRating = document.querySelector('.end-stars');
     
         completeContainer.style.display = "block";
+        paragraphOne.innerHTML = reactionOne;
         resultMoves.innerHTML = yourMoves.innerHTML;
         resultTime.innerHTML = yourTime.innerHTML;
         resultRating.style.backgroundPosition = yourRating.style.backgroundPosition;
+        paragraphTwo.innerHTML = reactionTwo;
         completeContainer.addEventListener('click', function() {
             completeContainer.style.display = "none";
             restart();
@@ -191,9 +195,19 @@ function gameComplete() {
     }, 1000);
 }
 
-//function reaction(); {
-    
-//}
+function reaction() {
+    let ratingResult = yourRating.style.backgroundPosition;
+    if (ratingResult === "0% 0%") {
+        reactionOne = "You did amazing!"
+        reactionTwo = "Now try to beat the clock, have another go!"
+    } else if (ratingResult === "50% 0%") {
+        reactionOne = "You did very well!"
+        reactionTwo = "Strive for perfection, have another go!"
+    } else {
+        reactionOne = "You did good!"
+        reactionTwo = "Practice makes pefect, have another go!"
+    }
+}
 
 function restart() {
     firstCard = undefined;
