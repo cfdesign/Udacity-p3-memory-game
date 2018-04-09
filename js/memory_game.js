@@ -1,6 +1,6 @@
 const gameFrag = document.createDocumentFragment(), gameContainer = document.querySelector('.game-container'),
-ratingBox = document.querySelector('.stars');
-let target, firstCard, secondCard, firstClass, secondClass, moves=0, match = 0,
+ratingBox = document.querySelector('.stars'), restartGame = document.querySelector('.restart');
+let target, firstCard, secondCard, firstClass, secondClass, moves=0, match = 0, timer,
 symbols = ["dessert", "island", "mountain", "rail", "ship", "stadium", "trail", "woods", "dessert", "island", "mountain", "rail", "ship", "stadium", "trail", "woods"];
 
 shuffle();
@@ -57,6 +57,7 @@ function arrayToHtml() {
     gameContainer.appendChild(gameFrag);
 }
 
+restartGame.addEventListener('click', restart); 
 gameContainer.addEventListener('click', findCardClass); 
 
 function findCardClass(evt) {
@@ -73,7 +74,7 @@ function findCardClass(evt) {
             firstCard = target  
             firstClass = firstCard.previousElementSibling.className;
             if (moves===0) {
-                timer(); // timer(); swap for
+                startTimer(); // timer(); swap for
             }
             animateFlip(target);
             setTimeout(function(){
@@ -127,7 +128,7 @@ function matchLog() {
     return moveLog();
 }
 
-function timer() {
+function startTimer() {
     timer = setInterval(addTime, 1000);
     let seconds = 0, ///should condense this into timer function - declare variables local or global?
     minutes = 0;
@@ -169,7 +170,19 @@ function rating() {
 function gameComplete() {
     yourRating = document.querySelector('.stars').outerHTML;
     yourTime = document.querySelector('.duration').innerHTML;
-    //restartGame = restart();
+    //restartButton = restart();
     clearInterval(timer)
     setTimeout(function() { alert("congratulations, you took "+yourTime); }, 1000);
 }
+
+function restart() {
+    firstCard = undefined;
+    secondCard = undefined;    
+    moves = 0
+    match = 0
+    gameContainer.innerHTML ='';
+    clearInterval(timer);
+    document.querySelector('.duration').innerHTML= `0:00`;
+    shuffle();
+}
+
