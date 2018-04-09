@@ -10,9 +10,9 @@ function shuffle() {
     temporaryValue, 
     randomIndex;
   
-    // While there remain elements to shuffle...
     while (0 !== currentIndex) {
   
+    // While there remain elements to shuffle...
       // Pick a remaining element...
       randomIndex = Math.floor(Math.random() * currentIndex); // math floor rounds down so can select numbers between 0-3 //pick 1
       currentIndex -= 1; //4 -1 = 3
@@ -166,13 +166,28 @@ function rating() {
     }, 600);
 }
 
-function gameComplete() {
-    yourRating = document.querySelector('.stars').outerHTML;
-    yourTime = document.querySelector('.duration').innerHTML;
-    //restartButton = restart();
+function gameComplete() { 
     clearInterval(timer)
-    setTimeout(function() { alert("congratulations, you took "+yourTime); }, 1000);
-}
+    //addReaction();
+    setTimeout(function() { 
+        const completeContainer = document.querySelector('.complete-container');
+        let yourMoves = document.querySelector('.count').innerHTML,
+        yourTime = document.querySelector('.duration').innerHTML,
+        yourRating = document.querySelector('.stars').style.backgroundPosition,
+        resultMoves = document.querySelector('.end-count'),
+        resultTime = document.querySelector('.end-duration'),
+        resultRating = document.querySelector('.end-stars');
+    
+        completeContainer.style.display = "block";
+        resultMoves.innerHTML = yourMoves;
+        resultTime.innerHTML = yourTime;
+        resultRating.style.backgroundPosition = yourRating;
+        completeContainer.addEventListener('click', function() {
+            completeContainer.style.display = "none";
+            restart();
+        });
+     }, 1000);
+    }
 
 function restart() {
     firstCard = undefined;
