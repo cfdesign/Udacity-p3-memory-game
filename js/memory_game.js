@@ -1,7 +1,12 @@
-const gameFrag = document.createDocumentFragment(), gameContainer = document.querySelector('.game-container'),
-ratingBox = document.querySelector('.stars'), restartGame = document.querySelector('.restart');
-let target, firstCard, secondCard, firstClass, secondClass, moves=0, match = 0, timer,
-symbols = ["dessert", "island", "mountain", "rail", "ship", "stadium", "trail", "woods", "dessert", "island", "mountain", "rail", "ship", "stadium", "trail", "woods"];
+const gameFrag = document.createDocumentFragment(), 
+gameContainer = document.querySelector('.game-container'),
+restartGame = document.querySelector('.restart'),
+yourMoves = document.querySelector('.count'),
+yourTime = document.querySelector('.duration'),
+yourRating = document.querySelector('.stars');
+
+let symbols = ["dessert", "island", "mountain", "rail", "ship", "stadium", "trail", "woods", "dessert", "island", "mountain", "rail", "ship", "stadium", "trail", "woods"],
+target, firstCard, secondCard, firstClass, secondClass, timer, moves=0, match= 0;
 
 shuffle();
 
@@ -155,11 +160,11 @@ function moveLog() {
 
 function rating() {
     if (moves < 16) {
-        ratingBox.style.backgroundPosition= "0 0";
+        yourRating.style.backgroundPosition= "0 0";
     } else if (moves > 15 && moves < 21) {
-        ratingBox.style.backgroundPosition= "50% 0";
+        yourRating.style.backgroundPosition= "50% 0";
     } else {
-        ratingBox.style.backgroundPosition= "100% 0";
+        yourRating.style.backgroundPosition= "100% 0";
     }
     setTimeout(function(){
         gameContainer.addEventListener('click', findCardClass); 
@@ -168,26 +173,27 @@ function rating() {
 
 function gameComplete() { 
     clearInterval(timer)
-    //addReaction();
+    //reaction();
     setTimeout(function() { 
         const completeContainer = document.querySelector('.complete-container');
-        let yourMoves = document.querySelector('.count').innerHTML,
-        yourTime = document.querySelector('.duration').innerHTML,
-        yourRating = document.querySelector('.stars').style.backgroundPosition,
-        resultMoves = document.querySelector('.end-count'),
+        let resultMoves = document.querySelector('.end-count'),
         resultTime = document.querySelector('.end-duration'),
         resultRating = document.querySelector('.end-stars');
     
         completeContainer.style.display = "block";
-        resultMoves.innerHTML = yourMoves;
-        resultTime.innerHTML = yourTime;
-        resultRating.style.backgroundPosition = yourRating;
+        resultMoves.innerHTML = yourMoves.innerHTML;
+        resultTime.innerHTML = yourTime.innerHTML;
+        resultRating.style.backgroundPosition = yourRating.style.backgroundPosition;
         completeContainer.addEventListener('click', function() {
             completeContainer.style.display = "none";
             restart();
         });
-     }, 1000);
-    }
+    }, 1000);
+}
+
+//function reaction(); {
+    
+//}
 
 function restart() {
     firstCard = undefined;
