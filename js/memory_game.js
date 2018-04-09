@@ -65,7 +65,7 @@ function findCardClass(evt) {
         gameContainer.removeEventListener('click', findCardClass); 
         target = evt.target;
         if (secondCard) {
-        animateFlip(firstCard);//toggleCard(); ?
+        animateFlip(firstCard);
         animateFlip(secondCard);
         firstCard = undefined;
         secondCard = undefined;    
@@ -74,12 +74,12 @@ function findCardClass(evt) {
             firstCard = target  
             firstClass = firstCard.previousElementSibling.className;
             if (moves===0) {
-                startTimer(); // timer(); swap for
+                startTimer();
             }
             animateFlip(target);
-            setTimeout(function(){
+            setTimeout(function() {
                 gameContainer.addEventListener('click', findCardClass); 
-            }, 200); // too long but also does not need to be applied to first click
+            }, 200);
         } else {
             secondCard = target
             secondClass = secondCard.previousElementSibling.className;
@@ -120,7 +120,7 @@ function matchCheck() {
     }
 }
 
-function matchLog() { //Move see notes below
+function matchLog() {
     match++;
     if (match === 8) {
         moveLog();
@@ -148,12 +148,12 @@ function startTimer() {
     }
 }
 
-function moveLog() { //Move see notes below
+function moveLog() {
     document.querySelector('.count').textContent = ++moves;
     return rating();
 }
 
-function rating() { //Move see notes below
+function rating() {
     if (moves < 16) {
         ratingBox.style.backgroundPosition= "0 0";
     } else if (moves > 15 && moves < 21) {
