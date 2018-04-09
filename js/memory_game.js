@@ -182,6 +182,7 @@ function restart() {
     secondCard = undefined;    
     moves = 0
     match = 0
+    rating();
     gameContainer.innerHTML ='';
     clearInterval(timer);
     document.querySelector('.duration').innerHTML= `0:00`;
