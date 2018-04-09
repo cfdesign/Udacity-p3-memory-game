@@ -140,8 +140,9 @@ function startTimer() {
                 seconds = "0"+seconds;
             }
         } else {
-            ++minutes;
             seconds=0;
+            seconds = "0"+seconds;
+            ++minutes;
         }
         document.querySelector('.duration').innerHTML= minutes+":"+seconds;
     }
@@ -169,7 +170,6 @@ function rating() { //Move see notes below
 }
 
 function gameComplete() {
-    gameContainer.addEventListener('click', findCardClass); 
     yourRating = document.querySelector('.stars').outerHTML;
     yourTime = document.querySelector('.duration').innerHTML;
     //restartButton = restart();
