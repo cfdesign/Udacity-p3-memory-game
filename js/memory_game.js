@@ -120,17 +120,18 @@ function matchCheck() {
     }
 }
 
-function matchLog() {
+function matchLog() { //Move see notes below
     match++;
     if (match === 8) {
-     return gameComplete();
+        moveLog();
+        return gameComplete();
     } 
     return moveLog();
 }
 
 function startTimer() {
     timer = setInterval(addTime, 1000);
-    let seconds = 0, ///should condense this into timer function - declare variables local or global?
+    let seconds = 0,
     minutes = 0;
     function addTime() {
         if (seconds < 59) {
@@ -146,12 +147,12 @@ function startTimer() {
     }
 }
 
-function moveLog() {
+function moveLog() { //Move see notes below
     document.querySelector('.count').textContent = ++moves;
     return rating();
 }
 
-function rating() {
+function rating() { //Move see notes below
     const threeStar = "0 0",
     twoStar = "50% 0",
     oneStar = "100% 0";
@@ -164,10 +165,11 @@ function rating() {
     }
     setTimeout(function(){
         gameContainer.addEventListener('click', findCardClass); 
-    }, 600); // too long but also does not need to be applied to first click
+    }, 600);
 }
 
 function gameComplete() {
+    gameContainer.addEventListener('click', findCardClass); 
     yourRating = document.querySelector('.stars').outerHTML;
     yourTime = document.querySelector('.duration').innerHTML;
     //restartButton = restart();
@@ -186,4 +188,9 @@ function restart() {
     document.querySelector('.count').textContent = `0`;
     shuffle();
 }
+///restart normally works fine, restart after game complete and the new cards game won't click,flip - unresponsive.
+    //removing innerHTML method - had to add event listener to gamecomplete - lets explore this
+///think about order logic of moveLog > rating > matchLog
+///move add.event listener to matchLog
+///reset displayed stars rating
 
