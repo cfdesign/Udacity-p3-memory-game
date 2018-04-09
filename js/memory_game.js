@@ -1,4 +1,4 @@
-const gameContainer = document.querySelector('.game-container'),
+const gameFrag = document.createDocumentFragment(), gameContainer = document.querySelector('.game-container'),
 ratingBox = document.querySelector('.stars');
 let target, firstCard, secondCard, firstClass, secondClass, moves=0, match = 0,
 symbols = ["dessert", "island", "mountain", "rail", "ship", "stadium", "trail", "woods", "dessert", "island", "mountain", "rail", "ship", "stadium", "trail", "woods"];
@@ -33,16 +33,28 @@ function duplication() {
             return shuffle();
         }
     }
-    return arrayToCss();
+    return arrayToHtml();
 } 
 
-function arrayToCss() {
-    const container = gameContainer.children;
-    let childNumber = 0;
+//function arrayToCss() { // old implementation of assigning cards/symbols
+    //const container = gameContainer.children;
+    //let childNumber = 0;
+    //for (const symbol of symbols) {
+      //  container[childNumber].children[0].className += ` ${symbol}`;
+        //childNumber ++;
+    //}
+//}
+
+function arrayToHtml() {
+    let newCard;
     for (const symbol of symbols) {
-        container[childNumber].children[0].className += ` ${symbol}`;
-        childNumber ++;
+        const newCard = document.createElement('div');
+        newCard.className = 'card'; 
+        newCard.innerHTML = `<div class="front ${symbol}"></div>
+                             <div class="back"></div>`;
+        gameFrag.appendChild(newCard);
     }
+    gameContainer.appendChild(gameFrag);
 }
 
 gameContainer.addEventListener('click', findCardClass); 
@@ -118,8 +130,7 @@ function matchLog() {
 function timer() {
     timer = setInterval(addTime, 1000);
     let seconds = 0, ///should condense this into timer function - declare variables local or global?
-    minutes = 0,
-    formatSec;
+    minutes = 0;
     function addTime() {
         if (seconds < 59) {
             ++seconds;
