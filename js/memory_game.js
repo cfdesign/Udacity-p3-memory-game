@@ -183,6 +183,7 @@ function restart() {
     gameContainer.innerHTML ='';
     clearInterval(timer);
     document.querySelector('.duration').innerHTML= `0:00`;
+    document.querySelector('.count').textContent = `0`;
     shuffle();
 }
 
