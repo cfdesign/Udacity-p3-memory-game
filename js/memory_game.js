@@ -154,15 +154,12 @@ function moveLog() { //Move see notes below
 }
 
 function rating() { //Move see notes below
-    const threeStar = "0 0",
-    twoStar = "50% 0",
-    oneStar = "100% 0";
     if (moves < 16) {
-        ratingBox.style.backgroundPosition=threeStar;
+        ratingBox.style.backgroundPosition= "0 0";
     } else if (moves > 15 && moves < 21) {
-        ratingBox.style.backgroundPosition= twoStar;
+        ratingBox.style.backgroundPosition= "50% 0";
     } else {
-        ratingBox.style.backgroundPosition= oneStar;
+        ratingBox.style.backgroundPosition= "100% 0";
     }
     setTimeout(function(){
         gameContainer.addEventListener('click', findCardClass); 
