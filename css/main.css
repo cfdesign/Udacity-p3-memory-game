@@ -223,8 +223,26 @@ header {
   animation-iteration-count: 2;
 }
 
+footer {
+  width:100%;
+}
+
+footer ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 0 auto 2%;
+  text-align: center;
+  list-style: none;
+}
+
+footer li a {
+  color: #a0a0a0;
+  text-decoration: none;
+}
+
 @media screen and (min-width: 600px) {
-  .game-container, .status-container, footer {
+  .game-container, .status-container, ul {
     margin:0 auto 1%;
     width:50%;
   }
