@@ -174,7 +174,7 @@ function rating() {
 }
 
 function gameComplete() { 
-    clearInterval(timer)
+    clearInterval(timer);
     reaction();
     setTimeout(function() { 
         const completeContainer = document.querySelector('.complete-container');
