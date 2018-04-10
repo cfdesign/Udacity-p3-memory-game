@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Questrial');
+
 html {
   margin: 0;
   padding: 0;
@@ -11,7 +12,7 @@ body {
   color: #a0a0a0;
   padding: 2em 1em;
   max-width: 1000px;
-  margin: auto; 
+  margin: auto;
 }
 
 h1,
@@ -96,7 +97,7 @@ header {
   margin-top: 0;
 }
 
-.moves-result, .timer-result{
+.moves-result, .timer-result {
   padding: 0 0 1% 0;
 }
 
@@ -105,7 +106,7 @@ header {
   padding-top:4%;
   margin: auto;
   margin-bottom: 2%;
-  background: url(../images/stars.svg) no-repeat 0% 0%; /* 0% = 3 star - 50% = 2 - 100% = 1*/
+  background: url(../images/stars.svg) no-repeat 0% 0%;
   background-size: 167%;
 }
 
@@ -114,7 +115,7 @@ header {
   background-color: #89b6e2;
   padding:1% 1%;
   content: "";
-  clear: both;  
+  clear: both;
   display: table;
   overflow: hidden;
 }
@@ -143,7 +144,7 @@ header {
   backface-visibility: hidden;
 }
 
-.front, .back{
+.front, .back {
   position: absolute;
   top: 0;
   left: 0;
@@ -153,13 +154,14 @@ header {
   -webkit-backface-visibility: hidden;
 	-moz-backface-visibility: hidden;
   -o-backface-visibility: hidden;
-	backface-visibility: hidden;}
+  backface-visibility: hidden;
+}
 
 .front {
   -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
   -o-transform: rotateY(180deg);
-  transform: rotateY(180deg);/* swap with .back to reverse animation (show back first, then front)*/
+  transform: rotateY(180deg);
 }
 
 .back {

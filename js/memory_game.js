@@ -7,7 +7,7 @@ yourRating = document.querySelector('.stars'),
 paragraphOne = document.querySelector('.reaction-1'),
 paragraphTwo = document.querySelector('.reaction-2');
 
-let symbols = ["dessert", "island", "mountain", "rail", "ship", "stadium", "trail", "woods", "dessert", "island", "mountain", "rail", "ship", "stadium", "trail", "woods"],
+let symbols = ['dessert', 'island', 'mountain', 'rail', 'ship', 'stadium', 'trail', 'woods', 'dessert', 'island', 'mountain', 'rail', 'ship', 'stadium', 'trail', 'woods'],
 target, firstCard, secondCard, firstClass, secondClass, timer, moves=0, match= 0, reactionOne, reactionTwo;
 
 shuffle();
@@ -32,7 +32,7 @@ function shuffle() {
     return duplication();
 }
 
-function duplication() {
+function duplication() { //Addtional functionality which checks if the shuffle has placed a pair side by side
     for (let i = 1; i < symbols.length; i++) {
         let previous = symbols[i -1],
         current = symbols[i];
@@ -52,7 +52,7 @@ function duplication() {
     //}
 //}
 
-function arrayToHtml() {
+function arrayToHtml() { // New implementation uses a document fragment for improved performance.
     let newCard;
     for (const symbol of symbols) {
         const newCard = document.createElement('div');
@@ -96,7 +96,7 @@ function findCardClass(evt) {
     }
 }
 
-//animateFlip
+//animation functions
 function animateFlip(toFlip) {
     toFlip.parentElement.classList.toggle('clicked');
 }
@@ -144,14 +144,14 @@ function startTimer() {
         if (seconds < 59) {
             ++seconds;
             if (seconds < 10) {
-                seconds = "0"+seconds;
+                seconds = '0'+seconds;
             }
         } else {
             seconds=0;
-            seconds = "0"+seconds;
+            seconds = '0'+seconds;
             ++minutes;
         }
-        document.querySelector('.duration').innerHTML= minutes+":"+seconds;
+        document.querySelector('.duration').innerHTML= minutes+':'+seconds;
     }
 }
 
@@ -162,11 +162,11 @@ function moveLog() {
 
 function rating() {
     if (moves < 16) {
-        yourRating.style.backgroundPosition= "0% 0%";
+        yourRating.style.backgroundPosition= '0% 0%';
     } else if (moves > 15 && moves < 21) {
-        yourRating.style.backgroundPosition= "50% 0%";
+        yourRating.style.backgroundPosition= '50% 0%';
     } else {
-        yourRating.style.backgroundPosition= "100% 0%";
+        yourRating.style.backgroundPosition= '100% 0%';
     }
     setTimeout(function(){
         gameContainer.addEventListener('click', findCardClass); 
@@ -182,30 +182,30 @@ function gameComplete() {
         resultTime = document.querySelector('.end-duration'),
         resultRating = document.querySelector('.end-stars');
     
-        completeContainer.style.display = "block";
+        completeContainer.style.display = 'block';
         paragraphOne.innerHTML = reactionOne;
         resultMoves.innerHTML = yourMoves.innerHTML;
         resultTime.innerHTML = yourTime.innerHTML;
         resultRating.style.backgroundPosition = yourRating.style.backgroundPosition;
         paragraphTwo.innerHTML = reactionTwo;
         completeContainer.addEventListener('click', function() {
-            completeContainer.style.display = "none";
+            completeContainer.style.display = 'none';
             restart();
         });
     }, 1000);
 }
 
-function reaction() {
+function reaction() { //Additional functionality which gives an appropriate modal response, based on rating.
     let ratingResult = yourRating.style.backgroundPosition;
-    if (ratingResult === "0% 0%") {
-        reactionOne = "You did amazing!"
-        reactionTwo = "Now try to beat the clock, have another go!"
-    } else if (ratingResult === "50% 0%") {
-        reactionOne = "You did very well!"
-        reactionTwo = "Strive for perfection, have another go!"
+    if (ratingResult === '0% 0%') {
+        reactionOne = 'You did amazing!'
+        reactionTwo = 'Now try to beat the clock, have another go!'
+    } else if (ratingResult === '50% 0%') {
+        reactionOne = 'You did very well!'
+        reactionTwo = 'Strive for perfection, have another go!'
     } else {
-        reactionOne = "You did good!"
-        reactionTwo = "Practice makes pefect, have another go!"
+        reactionOne = 'You did good!'
+        reactionTwo = 'Practice makes pefect, have another go!'
     }
 }
 
@@ -217,13 +217,8 @@ function restart() {
     rating();
     gameContainer.innerHTML ='';
     clearInterval(timer);
-    document.querySelector('.duration').innerHTML= `0:00`;
-    document.querySelector('.count').textContent = `0`;
+    document.querySelector('.duration').innerHTML= '0:00';
+    document.querySelector('.count').textContent = '0';
     shuffle();
 }
-///restart normally works fine, restart after game complete and the new cards game won't click,flip - unresponsive.
-    //removing innerHTML method - had to add event listener to gamecomplete - lets explore this
-///think about order logic of moveLog > rating > matchLog
-///move add.event listener to matchLog
-///reset displayed stars rating
 
