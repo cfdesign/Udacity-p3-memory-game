@@ -91,7 +91,9 @@ function findCardClass(evt) {
             secondCard = target
             secondClass = secondCard.previousElementSibling.className;
             animateFlip(target);
-            return matchCheck();
+            setTimeout(function(){
+                return matchCheck();
+            }, 400);
         }
     }
 }
