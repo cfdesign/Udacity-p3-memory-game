@@ -79,84 +79,104 @@ function arrayToHtml() {
 //Once game is set-up and ready, place 2 event listeners
 //One to restart the game 
 restartGame.addEventListener('click', restart);
-//One for the 16 cards
+//Another for the 16 cards
 gameContainer.addEventListener('click', findCardClass); 
 
 //Function activates once a click has been placed within the card container
 //this starts a 'function chain' 
 function findCardClass(evt) {
-    if (evt.target.className === 'back') {// ← verifies a card 'back' side has been clicked
+    if (evt.target.className === 'back') {// ← verifies card 'back' side has been clicked
         //remove the card click listeners to prevent further moves
         gameContainer.removeEventListener('click', findCardClass);
         target = evt.target;
-        //determines how many cards have been flipped
+        //This will only come into play by the third click & determines if two cards are currently flipped
         if (secondCard) {
+        //then returns the cards face down
         animateFlip(firstCard);
         animateFlip(secondCard);
+        //and removes their values
         firstCard = undefined;
         secondCard = undefined;    
         }
         if (!firstCard) {
+            //if firstCard undefined, assign event.target to the firstCard variable
             firstCard = target  
+            //then find out what classname-symbol its sibling holds on the 'front' face.
             firstClass = firstCard.previousElementSibling.className;
+            //Timer will only start once after first click
             if (moves===0) {
                 startTimer();
             }
             animateFlip(target);
+            //give some delay for the flip to complete before excepting further clicks
             setTimeout(function() {
                 gameContainer.addEventListener('click', findCardClass); 
             }, 200);
         } else {
+            //assign event.target the secondCard variable
             secondCard = target
+            //then find out what classname-symbol its sibling holds on the 'front' face.
             secondClass = secondCard.previousElementSibling.className;
             animateFlip(target);
+            //give some delay for the flip to complete before moving to next function
             setTimeout(function(){
+                // go to compare classname-symbols
                 return matchCheck();
             }, 400);
         }
     }
 }
 
-//animation functions
+//transform (flip)
+//takes in arguement of either first or second card
 function animateFlip(toFlip) {
     toFlip.parentElement.classList.toggle('clicked');
 }
-
+//animate (jump)
+//takes in arguement of either first or second card
 function animateMatch(toMatch) {
     toMatch.parentElement.classList.toggle('match');
 }
-
+//animate (shake)
+//takes in arguement of either first or second card
 function animateMiss(toMiss) {
     toMiss.parentElement.classList.toggle('mismatch');
 }
 
 function matchCheck() {
+    // Compare classname-symbols
     if (firstClass == secondClass) {
         animateMatch(firstCard);
         animateMatch(secondCard);
+        //reset values to allow firstCard and secondCard to be reassigned
         firstCard = undefined;
-        secondCard = undefined;    
+        secondCard = undefined; 
+        //match made must be recorded   
         return matchLog();
     } else {
         animateMiss(firstCard);
         animateMiss(secondCard);
+        //after delay remove shake animation class.
         setTimeout(function () { 
             animateMiss(firstCard);
             animateMiss(secondCard);
         }, 500);
+        //match was not made, record move
         return moveLog();
     }
 }
 
 function matchLog() {
     match++;
+    //keep track and record matches made.
     if (match === 8) {
         moveLog();
         return gameComplete();
     } 
+    //if game is not complete record moves.
     return moveLog();
 }
-
+//Started once, only after first click
 function startTimer() {
     timer = setInterval(addTime, 1000);
     let seconds = 0,
@@ -165,6 +185,7 @@ function startTimer() {
         if (seconds < 59) {
             ++seconds;
             if (seconds < 10) {
+                //add a leading zero digit to stop displayed time jumping after 9 seconds
                 seconds = '0'+seconds;
             }
         } else {
@@ -178,9 +199,10 @@ function startTimer() {
 
 function moveLog() {
     document.querySelector('.count').textContent = ++moves;
+    //record moves first, then evaluate star rating displayed
     return rating();
 }
-
+//rating logic positions an image sprite of stars
 function rating() {
     if (moves < 16) {
         yourRating.style.backgroundPosition= '0% 0%';
@@ -189,26 +211,31 @@ function rating() {
     } else {
         yourRating.style.backgroundPosition= '100% 0%';
     }
+    //rating(); is the final function in the chain, add delay to listen for further clicks
     setTimeout(function(){
         gameContainer.addEventListener('click', findCardClass); 
     }, 600);
 }
 
 function gameComplete() { 
+    // stop the timer
     clearInterval(timer);
+    //evaluate a reaction based on rating
     reaction();
+    //give a short delay to allow 'jump' match animation to complete
     setTimeout(function() { 
         const completeContainer = document.querySelector('.complete-container');
         let resultMoves = document.querySelector('.end-count'),
         resultTime = document.querySelector('.end-duration'),
         resultRating = document.querySelector('.end-stars');
-    
+        //obtain game score    
         completeContainer.style.display = 'block';
         paragraphOne.innerHTML = reactionOne;
         resultMoves.innerHTML = yourMoves.innerHTML;
         resultTime.innerHTML = yourTime.innerHTML;
         resultRating.style.backgroundPosition = yourRating.style.backgroundPosition;
         paragraphTwo.innerHTML = reactionTwo;
+        //add event listener to close modal
         completeContainer.addEventListener('click', function() {
             completeContainer.style.display = 'none';
             restart();
@@ -216,7 +243,7 @@ function gameComplete() {
     }, 1000);
 }
 
-function reaction() { //Additional functionality which gives an appropriate modal response, based on rating.
+function reaction() { //Additional functionality which evaluates an appropriate modal response, based on rating.
     let ratingResult = yourRating.style.backgroundPosition;
     if (ratingResult === '0% 0%') {
         reactionOne = 'You did amazing!'
@@ -230,6 +257,7 @@ function reaction() { //Additional functionality which gives an appropriate moda
     }
 }
 
+//resets all values to default
 function restart() {
     firstCard = undefined;
     secondCard = undefined;    
