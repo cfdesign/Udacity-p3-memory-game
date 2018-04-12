@@ -171,7 +171,7 @@ header {
   transform: rotateY(0deg);
   background: url(../images/question.svg) no-repeat bottom left #a0a0a0;
   background-size: contain;
-  }
+}
 
 .dessert {
   background: url(../images/dessert.svg) no-repeat bottom left #fff;
@@ -249,14 +249,14 @@ footer li a {
 }
 
 @keyframes shake {
-  0% { transform: translate(30px, 0px) rotate(0deg); }
-  50% { transform: translate(-30px, 0px) rotate(0deg); }
-  100% { transform: translate(30px, 0px) rotate(0deg); }
+  0% { transform: translate(30px, 0px) rotateY(180deg); }
+  50% { transform: translate(-30px, 0px) rotateY(180deg); }
+  100% { transform: translate(30px, 0px) rotateY(180deg); }
 }
 
 @keyframes jump {
-  30% { transform: translate(0px, -40px) rotate(0deg); }
-  60% { transform: translate(0px, 0px) rotate(0deg); }
-  80% { transform: translate(0px, -20px) rotate(0deg); }
-  100% { transform: translate(0px, 0px) rotate(0deg); }
+  30% { transform: translate(0px, -40px) rotateY(180deg); }
+  60% { transform: translate(0px, 0px) rotateY(180deg); }
+  80% { transform: translate(0px, -20px) rotateY(180deg); }
+  100% { transform: translate(0px, 0px) rotateY(180deg); }
 }
