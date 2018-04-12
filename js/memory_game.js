@@ -7,9 +7,12 @@ yourRating = document.querySelector('.stars'),
 paragraphOne = document.querySelector('.reaction-1'),
 paragraphTwo = document.querySelector('.reaction-2');
 
+//symbols array represents card symbols.
+//It contains 8 different classes, each class is duplicated to create an array of 16 strings altogther.
 let symbols = ['dessert', 'island', 'mountain', 'rail', 'ship', 'stadium', 'trail', 'woods', 'dessert', 'island', 'mountain', 'rail', 'ship', 'stadium', 'trail', 'woods'],
 target, firstCard, secondCard, firstClass, secondClass, timer, moves=0, match= 0, reactionOne, reactionTwo;
 
+// this function call kicks-off initialisation of the game by randomly shuffling the symbols array
 shuffle();
 
 function shuffle() {
@@ -29,21 +32,27 @@ function shuffle() {
       symbols[currentIndex] = symbols[randomIndex]; 
       symbols[randomIndex] = temporaryValue; 
     }
+    //After shuffle is complete duplication(); is called
     return duplication();
 }
 
-function duplication() { //Addtional functionality which checks if the shuffle has placed a pair side by side
+//Addtional functionality which checks if the shuffled array has placed a pair of symbols side-by-side
+function duplication() {
     for (let i = 1; i < symbols.length; i++) {
         let previous = symbols[i -1],
         current = symbols[i];
         if (previous === current) {
+            //If there is duplication side-by-side, re-shuffle array.
             return shuffle();
         }
     }
+    //Otherwise continue with next step
     return arrayToHtml();
 } 
 
-//function arrayToCss() { // old implementation of assigning cards/symbols
+//old implementation of assigning array symbols to pre-made HTML card structure
+    //Symbol array strings represent card CSS classes. These are inserted into the DOM one by one, 16 times.
+//function arrayToCss() { 
     //const container = gameContainer.children;
     //let childNumber = 0;
     //for (const symbol of symbols) {
@@ -52,9 +61,12 @@ function duplication() { //Addtional functionality which checks if the shuffle h
     //}
 //}
 
-function arrayToHtml() { // New implementation uses a document fragment for improved performance.
+// New implementation uses a document fragment for improved performance.
+function arrayToHtml() { 
     let newCard;
     for (const symbol of symbols) {
+         //Creates HTML for 16 cards & inserts one of the 16 array strings to each card.
+         //Array strings represent CSS classes, which include background images to be matched.
         const newCard = document.createElement('div');
         newCard.className = 'card'; 
         newCard.innerHTML = `<div class="front ${symbol}"></div>
@@ -64,13 +76,20 @@ function arrayToHtml() { // New implementation uses a document fragment for impr
     gameContainer.appendChild(gameFrag);
 }
 
-restartGame.addEventListener('click', restart); 
+//Once game is set-up and ready, place 2 event listeners
+//One to restart the game 
+restartGame.addEventListener('click', restart);
+//One for the 16 cards
 gameContainer.addEventListener('click', findCardClass); 
 
+//Function activates once a click has been placed within the card container
+//this starts a 'function chain' 
 function findCardClass(evt) {
-    if (evt.target.className === 'back') { // ← verifies target is desired 
-        gameContainer.removeEventListener('click', findCardClass); 
+    if (evt.target.className === 'back') {// ← verifies a card 'back' side has been clicked
+        //remove the card click listeners to prevent further moves
+        gameContainer.removeEventListener('click', findCardClass);
         target = evt.target;
+        //determines how many cards have been flipped
         if (secondCard) {
         animateFlip(firstCard);
         animateFlip(secondCard);
@@ -223,4 +242,3 @@ function restart() {
     document.querySelector('.count').textContent = '0';
     shuffle();
 }
-
