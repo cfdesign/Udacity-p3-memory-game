@@ -198,13 +198,13 @@ function startTimer() {
 }
 
 function moveLog() {
-    let count = document.querySelector('.count').textContent;
+    let count = document.querySelector('.count');
     ++moves
     if (moves < 10) {
         //add a leading zero digit to stop displayed moves jumping after 9
-        count = '0'+moves;
+        count.textContent = '0'+moves;
     } else {
-        count = moves;
+        count.textContent = moves;
     }
     //record moves first, then evaluate star rating displayed
     return rating();
