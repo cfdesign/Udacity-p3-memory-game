@@ -20,7 +20,7 @@ h2,
 h3,
 h4,
 h5 {
-  margin: 0; 
+  margin: 0;
 }
 
 header,
@@ -55,7 +55,7 @@ header {
   padding-top:4%;
   margin: auto;
   margin-bottom: 2%;
-  background: url(../images/stars.svg) no-repeat 0% 0%; /* 0% = 3 star - 50% = 2 - 100% = 1*/
+  background: url('../images/stars.svg') no-repeat 0% 0%; /* 0% = 3 star - 50% = 2 - 100% = 1*/
   background-size: 167%;
 }
 
@@ -107,7 +107,7 @@ header {
   padding-top:4%;
   margin: auto;
   margin-bottom: 2%;
-  background: url(../images/stars.svg) no-repeat 0% 0%;
+  background: url('../images/stars.svg') no-repeat 0% 0%;
   background-size: 167%;
 }
 
@@ -171,47 +171,47 @@ header {
   -moz-transform: rotateY(0deg);
   -o-transform: rotateY(0deg);
   transform: rotateY(0deg);
-  background: url(../images/question.svg) no-repeat bottom left #a0a0a0;
+  background: url('../images/question.svg') no-repeat bottom left #a0a0a0;
   background-size: contain;
 }
 
 .dessert {
-  background: url(../images/dessert.svg) no-repeat bottom left #fff;
+  background: url('../images/dessert.svg') no-repeat bottom left #fff;
   background-size: contain;
 }
 
 .island {
-  background: url(../images/island.svg) no-repeat bottom left #fff;
+  background: url('../images/island.svg') no-repeat bottom left #fff;
   background-size: contain;
 }
 
 .mountain {
-  background: url(../images/mountain.svg) no-repeat bottom left #fff;
+  background: url('../images/mountain.svg') no-repeat bottom left #fff;
   background-size: contain;
 }
 
 .rail {
-  background: url(../images/rail.svg) no-repeat bottom left #fff;
+  background: url('../images/rail.svg') no-repeat bottom left #fff;
   background-size: contain;
 }
 
 .ship {
-  background: url(../images/ship.svg) no-repeat bottom left #fff;
+  background: url('../images/ship.svg') no-repeat bottom left #fff;
   background-size: contain;
 }
 
 .stadium {
-  background: url(../images/stadium.svg) no-repeat bottom left #fff;
+  background: url('../images/stadium.svg') no-repeat bottom left #fff;
   background-size: contain;
 }
 
 .trail {
-  background: url(../images/trail.svg) no-repeat bottom left #fff;
+  background: url('../images/trail.svg') no-repeat bottom left #fff;
   background-size: contain;
 }
 
 .woods {
-  background: url(../images/woods.svg) no-repeat bottom left #fff;
+  background: url('../images/woods.svg') no-repeat bottom left #fff;
   background-size: contain;
 }
 
