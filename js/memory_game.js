@@ -168,10 +168,6 @@ function matchCheck() {
 
 function matchLog() {
     match++;
-    if (match < 10) {
-        //add a leading zero digit to stop displayed moves jumping after 9 moves
-        match = '0'+match;
-    }
     //keep track and record matches made.
     if (match === 8) {
         moveLog();
@@ -202,7 +198,14 @@ function startTimer() {
 }
 
 function moveLog() {
-    document.querySelector('.count').textContent = ++moves;
+    let count = document.querySelector('.count').textContent;
+    ++moves
+    if (moves < 10) {
+        //add a leading zero digit to stop displayed moves jumping after 9
+        count = '0'+moves;
+    } else {
+        count = moves;
+    }
     //record moves first, then evaluate star rating displayed
     return rating();
 }
@@ -271,6 +274,6 @@ function restart() {
     gameContainer.innerHTML ='';
     clearInterval(timer);
     document.querySelector('.duration').innerHTML= '0:00';
-    document.querySelector('.count').textContent = '0';
+    document.querySelector('.count').textContent = '00';
     shuffle();
 }
