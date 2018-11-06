@@ -16,7 +16,7 @@ target, firstCard, secondCard, firstClass, secondClass, timer, moves=0, match= 0
 shuffle();
 
 function shuffle() {
-    let currentIndex = symbols.length, 
+    let currentIndex = symbols.length, //16 objects = 15 indices
     temporaryValue, 
     randomIndex;
   
@@ -24,13 +24,13 @@ function shuffle() {
   
     // While there remain elements to shuffle...
       // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex); // math floor rounds down so can select numbers between 0-3 //pick 1
-      currentIndex -= 1; //4 -1 = 3
+      randomIndex = Math.floor(Math.random() * currentIndex); // currentIndex = symbols.length = 16 math floor rounds down to select numbers between indice 0-15
+      currentIndex -= 1; //deduct 1 // 16 -1 = 15
   
       // And swap it with the current element.
-      temporaryValue = symbols[currentIndex]; 
-      symbols[currentIndex] = symbols[randomIndex]; 
-      symbols[randomIndex] = temporaryValue; 
+      temporaryValue = symbols[currentIndex]; //current last index (15)
+      symbols[currentIndex] = symbols[randomIndex]; //the current last index object (15) now becomes a random array object
+      symbols[randomIndex] = temporaryValue; //the random array object is replaced by what was the current last index object (15) 
     }
     //After shuffle is complete duplication(); is called
     return duplication();
