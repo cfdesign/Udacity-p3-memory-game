@@ -1,4 +1,4 @@
-const gameFrag = document.createDocumentFragment(), 
+const gameFrag = document.createDocumentFragment(),
 gameContainer = document.querySelector('.game-container'),
 restartGame = document.querySelector('.restart'),
 yourMoves = document.querySelector('.count'),
@@ -17,20 +17,20 @@ shuffle();
 
 function shuffle() {
     let currentIndex = symbols.length, //16 objects = 15 indices
-    temporaryValue, 
+    temporaryValue,
     randomIndex;
-  
+
     while (0 !== currentIndex) {
-  
+
     // While there remain elements to shuffle...
       // Pick a remaining element...
       randomIndex = Math.floor(Math.random() * currentIndex); // currentIndex = symbols.length = 16 math floor rounds down to select numbers between indice 0-15
       currentIndex -= 1; //deduct 1 // 16 -1 = 15
-  
+
       // And swap it with the current element.
       temporaryValue = symbols[currentIndex]; //current last index (15)
       symbols[currentIndex] = symbols[randomIndex]; //the current last index object (15) now becomes a random array object
-      symbols[randomIndex] = temporaryValue; //the random array object is replaced by what was the current last index object (15) 
+      symbols[randomIndex] = temporaryValue; //the random array object is replaced by what was the current last index object (15)
     }
     //After shuffle is complete duplication(); is called
     return duplication();
@@ -48,11 +48,11 @@ function duplication() {
     }
     //Otherwise continue with next step
     return arrayToHtml();
-} 
+}
 
 //old implementation of assigning array symbols to pre-made HTML card structure
     //Symbol array strings represent card CSS classes. These are inserted into the DOM one by one, 16 times.
-//function arrayToCss() { 
+//function arrayToCss() {
     //const container = gameContainer.children;
     //let childNumber = 0;
     //for (const symbol of symbols) {
@@ -62,13 +62,13 @@ function duplication() {
 //}
 
 // New implementation uses a document fragment for improved performance.
-function arrayToHtml() { 
+function arrayToHtml() {
     let newCard;
     for (const symbol of symbols) {
          //Creates HTML for 16 cards & inserts one of the 16 array strings to each card.
          //Array strings represent CSS classes, which include background images to be matched.
         const newCard = document.createElement('div');
-        newCard.className = 'card'; 
+        newCard.className = 'card';
         newCard.innerHTML = `<div class="front ${symbol}"></div>
                              <div class="back"></div>`;
         gameFrag.appendChild(newCard);
@@ -77,13 +77,13 @@ function arrayToHtml() {
 }
 
 //Once game is set-up and ready, place 2 event listeners
-//One to restart the game 
+//One to restart the game
 restartGame.addEventListener('click', restart);
 //Another for the 16 cards
-gameContainer.addEventListener('click', findCardClass); 
+gameContainer.addEventListener('click', findCardClass);
 
 //Function activates once a click has been placed within the card container
-//this starts a 'function chain' 
+//this starts a 'function chain'
 function findCardClass(evt) {
     if (evt.target.className === 'back') {// ← verifies card 'back' side has been clicked
         //remove the card click listeners to prevent further moves
@@ -96,11 +96,11 @@ function findCardClass(evt) {
         animateFlip(secondCard);
         //and removes their values
         firstCard = undefined;
-        secondCard = undefined;    
+        secondCard = undefined;
         }
         if (!firstCard) {
             //if firstCard undefined, assign event.target to the firstCard variable
-            firstCard = target  
+            firstCard = target
             //then find out what classname-symbol its sibling holds on the 'front' face.
             firstClass = firstCard.previousElementSibling.className;
             //Timer will only start once after first click
@@ -110,7 +110,7 @@ function findCardClass(evt) {
             animateFlip(target);
             //give some delay for the flip to complete before excepting further clicks
             setTimeout(function() {
-                gameContainer.addEventListener('click', findCardClass); 
+                gameContainer.addEventListener('click', findCardClass);
             }, 200);
         } else {
             //assign event.target the secondCard variable
@@ -150,14 +150,14 @@ function matchCheck() {
         animateMatch(secondCard);
         //reset values to allow firstCard and secondCard to be reassigned
         firstCard = undefined;
-        secondCard = undefined; 
-        //match made must be recorded   
+        secondCard = undefined;
+        //match made must be recorded
         return matchLog();
     } else {
         animateMiss(firstCard);
         animateMiss(secondCard);
         //after delay remove shake animation class.
-        setTimeout(function () { 
+        setTimeout(function () {
             animateMiss(firstCard);
             animateMiss(secondCard);
         }, 500);
@@ -168,11 +168,15 @@ function matchCheck() {
 
 function matchLog() {
     match++;
+    if (match < 10) {
+        //add a leading zero digit to stop displayed moves jumping after 9 moves
+        match = '0'+match;
+    }
     //keep track and record matches made.
     if (match === 8) {
         moveLog();
         return gameComplete();
-    } 
+    }
     //if game is not complete record moves.
     return moveLog();
 }
@@ -213,22 +217,22 @@ function rating() {
     }
     //rating(); is the final function in the chain, add delay to listen for further clicks
     setTimeout(function(){
-        gameContainer.addEventListener('click', findCardClass); 
+        gameContainer.addEventListener('click', findCardClass);
     }, 600);
 }
 
-function gameComplete() { 
+function gameComplete() {
     // stop the timer
     clearInterval(timer);
     //evaluate a reaction based on rating
     reaction();
     //give a short delay to allow 'jump' match animation to complete
-    setTimeout(function() { 
+    setTimeout(function() {
         const completeContainer = document.querySelector('.complete-container');
         let resultMoves = document.querySelector('.end-count'),
         resultTime = document.querySelector('.end-duration'),
         resultRating = document.querySelector('.end-stars');
-        //obtain game score    
+        //obtain game score
         completeContainer.style.display = 'block';
         paragraphOne.innerHTML = reactionOne;
         resultMoves.innerHTML = yourMoves.innerHTML;
@@ -260,7 +264,7 @@ function reaction() { //Additional functionality which evaluates an appropriate 
 //resets all values to default
 function restart() {
     firstCard = undefined;
-    secondCard = undefined;    
+    secondCard = undefined;
     moves = 0
     match = 0
     rating();
